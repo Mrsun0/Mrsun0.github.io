@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>人生羁客</title>
+  
+  <subtitle>羁旅</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://guoweisun.xyz/"/>
+  <updated>2020-03-02T11:06:02.962Z</updated>
+  <id>http://guoweisun.xyz/</id>
+  
+  <author>
+    <name>mrsun0</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>firstblog</title>
+    <link href="http://guoweisun.xyz/2020/03/02/firstblog/"/>
+    <id>http://guoweisun.xyz/2020/03/02/firstblog/</id>
+    <published>2020-03-02T07:31:57.000Z</published>
+    <updated>2020-03-02T11:06:02.962Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;历经&quot;&gt;&lt;a href=&quot;#历经&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="前沿技术" scheme="http://guoweisun.xyz/categories/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="-技术 -IT" scheme="http://guoweisun.xyz/tags/%E6%8A%80%E6%9C%AF-IT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://guoweisun.xyz/2020/03/02/hello-world/"/>
+    <id>http://guoweisun.xyz/2020/03/02/hello-world/</id>
+    <published>2020-03-02T03:51:05.977Z</published>
+    <updated>2020-03-02T03:51:05.977Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>firstblog</title>
+    <url>/2020/03/02/firstblog/</url>
+    <content><![CDATA[<h1 id="历经"><a href="#历经" class="headerlink" title="历经"></a>历经</h1><p>将近<strong>半个月</strong>的时间，经历了<em>选择域名，选择云服务器，再选择web服务器</em>的种种过程后，终于还是发现github的pages空间是最棒的，且不说githubpages作为美国的网站免备案，更是由于其免费，快捷，托管的巨大优势成为小型blog的首选。</p>
+<h1 id="选择过程"><a href="#选择过程" class="headerlink" title="选择过程"></a>选择过程</h1><h2 id="一、域名与服务器"><a href="#一、域名与服务器" class="headerlink" title="一、域名与服务器"></a>一、域名与服务器</h2><p>意外的，通过腾讯云的一元钱域名入了此坑，选择了最便宜的.xyz域名,而且腾讯云还体贴的送了十五天的云服务器体验时间，于是在最初里我通过tomcat和javaee创建了一个简单的小网页，本想继续深造，却突然发现，腾讯云这么好不是没有原因的。备案是其一，服务器的超贵价格是其二，一年居然要将近1000rmb，无奈放弃；</p>
+<h2 id="二、了解githubpages"><a href="#二、了解githubpages" class="headerlink" title="二、了解githubpages"></a>二、了解githubpages</h2><p>其实github我也是已经注册了很久的一段时间了，却一直没有好好的利用这个全球最先进的分布式系统。githubpages的本意是为人们的项目提供一个简洁明了的介绍页面，但因为其免费快捷可托管的特性，意外的被当做了小型blog的云服务器。关于这点，很多人也有争议，认为这是一种蝗虫行为。</p>
+<blockquote>
+<p>说中国人是蝗虫还真是不错，github被屏蔽了你就开心了？就像蝗虫，有好东西一拥而上，生怕自己抢不到，吃光了或不抢不过了就换下一个地方，继续搞。<br>这种东西需要写篇文章来宣传么，不知道宣传了以后的后果么，本来是个挺好的社区博客，有可能会因为你这一篇文章，搞的大家以后都用不了了，麻烦作者以后发文章前先考虑对社会的影响，对社区的影响，顾全大局…</p>
+</blockquote>
+<p>也有人认为这种行为是全球网络和谐的前提和征兆：</p>
+<blockquote>
+<p>就算 github 真的被墙了，错的也是弄出墙的这些人，跟博主有半毛钱关系？<br>看到好的东西不分享出来，自己偷摸留着，这算什么心态？<br>见到出色的产品，我觉得最好的做法就是像博主一样毫无保留的介绍给别人，方便的话也捎带介绍一下墙是什么。人都有自己的判断力的，能通过对比分出好坏，能想明白他在网上受到了多大限制，为什么一些国外网站不被允许访问。<br>github 是好东西，但藏着不让大伙知道就可以不被墙了？我不这么看，反倒是当每个网民都知道事实的时候，就离墙消失的一天不远了，那时候大家安心的去用 github 不是更好吗？</p>
+</blockquote>
+<p>但是其实针对博客在githubpages上的创建，在两年前就已经有牛人开发了hexo，专门用来帮助快捷的创建博客，甚至还有多款主题，而github也因此发展出了一个pull分支，就是围绕hexo编写主题。可以说这种行为其实是促进了代码的贡献的，我个人比较倾向于后一种看法！</p>
+]]></content>
+      <categories>
+        <category>前沿技术</category>
+      </categories>
+      <tags>
+        <tag>-技术 -IT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/03/02/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+</search>

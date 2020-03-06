@@ -186,7 +186,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -253,6 +253,164 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoweisun.xyz/2020/03/06/Java%E4%B8%AD%E5%90%84%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrsun0">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人生羁客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/06/Java%E4%B8%AD%E5%90%84%E7%B1%BB%E5%9E%8B%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" itemprop="url">Java中各类型的相互转化方法总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-06T11:25:52+08:00">
+                2020-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在做java有关的力扣题时，发现自己对java的一些基础知识和基本语法还不是很熟练，所谓“一屋不扫，何以扫天下”，“千里之行，始于足下”，所以此时我决定将一些基础的但却不引人重视的java语法整理一下，方便自己的随时查看和复习，在以后也会有更多的内容归类到这个标签下。本次整理的主题是java类型的转化方法。</p>
+<h2 id="一、各类型转化为String"><a href="#一、各类型转化为String" class="headerlink" title="一、各类型转化为String"></a>一、各类型转化为String</h2><h3 id="1-int转化为String"><a href="#1-int转化为String" class="headerlink" title="1. int转化为String"></a>1. int转化为String</h3><p>   int与String之间不能相互直接转化，因为int是java语法中的基本类型，而String是一个类，import自java.util,但可以间接转化：</p>
+<pre><code>int a=0;
+Integer inter=new Integer(a);
+String str=inter.toString();</code></pre><h3 id="2-float转化为String"><a href="#2-float转化为String" class="headerlink" title="2.float转化为String"></a>2.float转化为String</h3><p>与int的转化同理：</p>
+<pre><code>float f=3.1415f;
+Float flo=new Float(f);
+String str=flo.toString();</code></pre><h3 id="3-double转化为String"><a href="#3-double转化为String" class="headerlink" title="3.double转化为String"></a>3.double转化为String</h3><pre><code> double d=3.1415;
+Double dou=new Double(d);
+String str2=dou.toString();</code></pre><h2 id="二、String-转化为各类型"><a href="#二、String-转化为各类型" class="headerlink" title="二、String 转化为各类型"></a>二、String 转化为各类型</h2><h3 id="1-String转化为int"><a href="#1-String转化为int" class="headerlink" title="1.String转化为int"></a>1.String转化为int</h3><pre><code>int i=Integer.parseInt(str);</code></pre><h3 id="2-String转化为Integer"><a href="#2-String转化为Integer" class="headerlink" title="2.String转化为Integer"></a>2.String转化为Integer</h3><pre><code>Integer inter = Integer.valueOf(str);</code></pre><h3 id="3-String转化为float"><a href="#3-String转化为float" class="headerlink" title="3.String转化为float"></a>3.String转化为float</h3><p>方法float,double,int其实都差不多</p>
+<pre><code>float f=Float.parseFloat(str);</code></pre><h2 id="三、int、float、double之间的相互转换"><a href="#三、int、float、double之间的相互转换" class="headerlink" title="三、int、float、double之间的相互转换"></a>三、int、float、double之间的相互转换</h2><p><strong>注意：尽量由小字节向高字节转化，否则易发生数据错误</strong></p>
+<h3 id="1-int-gt-float、float-gt-double"><a href="#1-int-gt-float、float-gt-double" class="headerlink" title="1.int-&gt;float、float-&gt;double"></a>1.int-&gt;float、float-&gt;double</h3><pre><code>int i=3;
+float f=i;
+double d=f;
+double d=i;</code></pre><p>自动转化即可。</p>
+<h3 id="2-反之"><a href="#2-反之" class="headerlink" title="2.反之"></a>2.反之</h3><p>则需要强制转化</p>
+<pre><code>double d=3.1415;
+float f =(float)d;</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -588,7 +746,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -599,7 +757,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -610,7 +768,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://guoweisun.xyz/"/>
-  <updated>2020-03-06T04:28:53.497Z</updated>
+  <updated>2020-03-07T13:08:34.078Z</updated>
   <id>http://guoweisun.xyz/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记一次晚饭杂感</title>
+    <link href="http://guoweisun.xyz/2020/03/07/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%99%9A%E9%A5%AD%E6%9D%82%E6%84%9F/"/>
+    <id>http://guoweisun.xyz/2020/03/07/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%99%9A%E9%A5%AD%E6%9D%82%E6%84%9F/</id>
+    <published>2020-03-07T12:07:02.000Z</published>
+    <updated>2020-03-07T13:08:34.078Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;&amp;emsp;&amp;emsp;&lt;strong&gt;晚&lt;/strong&gt;饭前，我意外看到研究生复试大多要考英语听力的消息，瞬时慌了一下。毕竟我当初下决心要考研就是因为初试英语不考听力,虽然说复试中的英语比例没有那么大，但是想到就很慌的有木有！！！&lt;del&gt;_&lt;/del&gt;一时间都不知道该
+        
+      
+    
+    </summary>
+    
+    
+      <category term="心情日志" scheme="http://guoweisun.xyz/categories/%E5%BF%83%E6%83%85%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="-心情 -成长" scheme="http://guoweisun.xyz/tags/%E5%BF%83%E6%83%85-%E6%88%90%E9%95%BF/"/>
+    
+  </entry>
   
   <entry>
     <title>Java中各类型的相互转化方法总结</title>

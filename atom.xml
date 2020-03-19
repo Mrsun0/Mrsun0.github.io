@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://guoweisun.xyz/"/>
-  <updated>2020-03-07T13:08:34.078Z</updated>
+  <updated>2020-03-19T09:58:37.865Z</updated>
   <id>http://guoweisun.xyz/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>对vscodeC++11标准的环境配置</title>
+    <link href="http://guoweisun.xyz/2020/03/19/%E5%AF%B9vscodeC-11%E6%A0%87%E5%87%86%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>http://guoweisun.xyz/2020/03/19/%E5%AF%B9vscodeC-11%E6%A0%87%E5%87%86%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
+    <published>2020-03-19T09:27:23.000Z</published>
+    <updated>2020-03-19T09:58:37.865Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;自从学了java以后，发现自己对C++有些疏于练习了，因为很多地方java的优势性和应用性是强于c语言的。当然，这是对普通的编码工作来说，C语言在造轮子方面有他无与伦比的优势，甚至C语言可以直接用来写操作系统。但是虽然C有些不方便，C++却因为它强大的stl库流行于学生之间
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="http://guoweisun.xyz/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="-工具" scheme="http://guoweisun.xyz/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>记一次晚饭杂感</title>

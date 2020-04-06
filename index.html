@@ -267,6 +267,423 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoweisun.xyz/2020/04/06/%E5%AF%B9STL%E4%B8%AD%E5%8F%AF%E6%8E%92%E5%BA%8F%E5%AE%B9%E5%99%A8%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrsun0">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人生羁客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/06/%E5%AF%B9STL%E4%B8%AD%E5%8F%AF%E6%8E%92%E5%BA%8F%E5%AE%B9%E5%99%A8%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%88%86%E6%9E%90/" itemprop="url">gagaga</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-06T10:57:50+08:00">
+                2020-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、set"><a href="#一、set" class="headerlink" title="一、set"></a>一、set</h2><h3 id="（1）实现机制"><a href="#（1）实现机制" class="headerlink" title="（1）实现机制"></a>（1）实现机制</h3><p>以下叙述引自<a href="http://www.cplusplus.com/reference/set/set/" target="_blank" rel="noopener">C++ reference</a></p>
+<blockquote>
+<p>Sets are containers that store unique elements following a specific order.<br>In a set, the value of an element also identifies it (the value is itself the key, of type T), and each value must be unique. The value of the elements in a set cannot be modified once in the container (the elements are always const), but they can be inserted or removed from the container.</p>
+</blockquote>
+<blockquote>
+<p>set containers are generally slower than unordered_set containers to access individual elements by their key, but they allow the direct iteration on subsets based on their order.</p>
+</blockquote>
+<blockquote>
+<p>Sets are typically implemented as binary search trees.</p>
+</blockquote>
+<p>　　翻译大意就是：<br>　　set是一个特殊的存储非重复元素的有特定顺序的容器，另外还需注意的是，set中的元素不可更改，元素一直都是常数（当然可以增添和删除）；<br><br>　　set容器通常比unordered_set容器通过它们的键访问单个元素的速度慢，但是它们允许根据它们的顺序对子集进行直接迭代；<br><br>　　set就是一颗二叉搜索树典型的实现。</p>
+<h3 id="2-使用构造函数实现排序"><a href="#2-使用构造函数实现排序" class="headerlink" title="(2) 使用构造函数实现排序"></a>(2) 使用构造函数实现排序</h3><h4 id="1-默认构造函数，升序排序"><a href="#1-默认构造函数，升序排序" class="headerlink" title="1.默认构造函数，升序排序"></a>1.默认构造函数，升序排序</h4><pre><code>set&lt;int&gt; aa;
+aa.insert(5);
+aa.insert(8);
+aa.insert(1);</code></pre><h4 id="2-使用functional头文件中的less，greater实现基本数据类型排序"><a href="#2-使用functional头文件中的less，greater实现基本数据类型排序" class="headerlink" title="2.使用functional头文件中的less，greater实现基本数据类型排序"></a>2.使用functional头文件中的less，greater实现基本数据类型排序</h4><p>其中greater是降序排序，less是升序排序，可能从名字上看是相反的，但他们的命名是由其实现决定的，比如greater内部实现通过重载”&lt;”,来实现”&gt;”的功能：</p>
+<pre><code>set&lt;int,greater&lt;int&gt; &gt; a;
+a.insert(5);
+a.insert(8);
+a.insert(1);</code></pre><h4 id="3-自定义结构体或类-，重载（）运算符排序"><a href="#3-自定义结构体或类-，重载（）运算符排序" class="headerlink" title="3.自定义结构体或类 ，重载（）运算符排序"></a>3.自定义结构体或类 ，重载（）运算符排序</h4><pre><code>struct cmp {
+bool operator() (const int&amp; lhs, const int&amp; rhs) const
+{return lhs&gt;rhs;}
+};
+
+set&lt;int,cmp&gt; aa;
+aa.insert(5);
+aa.insert(8);
+aa.insert(1);</code></pre><h4 id="4-对自定义的结构体排序"><a href="#4-对自定义的结构体排序" class="headerlink" title="4.对自定义的结构体排序"></a>4.对自定义的结构体排序</h4><p>以上三种排序方法都是对基本数据类型的排序，那么当需要对自定义的结构体进行排序时怎么办呢？可以类似于上一种，在结构体中重载”&lt;”运算符就可以了；</p>
+<pre><code>struct Node{
+int a;
+int b;
+Node(int _a,int _b):a(_a),b(_b){}
+bool operator &lt; (const Node&amp; rhs) const{
+    return a != rhs.a ? a &gt; rhs.a : b &gt; rhs.b;//以a为第一比较标准，当a相等时比较b，降序排列
+}
+};
+
+int main(){
+set&lt;Node&gt; aaa;
+aaa.insert(Node(2,3));
+aaa.insert(Node(2,4));
+aaa.insert(Node(3,3));
+aaa.insert(Node(4,3));
+}</code></pre><p>###（3） 对重载符号的讨论 ###<br>看到这里，可能会有同学疑问，为什么两个自定义结构体进行排序重载的运算符不同呢？我们不妨先来看一下set的构造函数<br><br>有参：</p>
+<pre><code>set (InputIterator first, InputIterator last,
+   const key_compare&amp; comp = key_compare(),
+   const allocator_type&amp; = allocator_type());</code></pre><p>无参(即我们只在&lt;&gt;里面声明了数据类型并不是完全无参）：</p>
+<pre><code>explicit set (const allocator_type&amp; alloc);</code></pre><p>当无参的时候，默认的排序方法是使用“&lt;”对元素进行比较，所以当我们对自己定义的结构体进行排序时只需要重载&lt;运算符就可以了，当然我们也可以像前面一种方法一样，重载（）运算符，如下：</p>
+<pre><code>struct Node{
+int a;
+int b;
+Node(int _a,int _b):a(_a),b(_b){}
+/*bool operator &lt; (const Node&amp; rhs) const{
+    return a != rhs.a ? a &gt; rhs.a : b &gt; rhs.b;//以a为第一比较标准，当a相等时比较b，降序排列
+}*/
+};
+struct cmp {
+  bool operator () (const Node&amp; lhs, const Node&amp; rhs) const
+  {return lhs.a != rhs.a ? lhs.a &gt; rhs.a : lhs.b &gt; rhs.b;}
+};
+int main()
+{
+set&lt;Node,cmp&gt; aaa;
+aaa.insert(Node(2,3));
+aaa.insert(Node(2,4));
+aaa.insert(Node(3,3));
+aaa.insert(Node(4,3));
+}</code></pre><p>实现的功能和上述完全相同，只不过代码一下子变得臃肿起来，不仅需要自定义结构体，还有另外定义一个比较函数的结构体；</p>
+<h3 id="（4）set容器排序总结"><a href="#（4）set容器排序总结" class="headerlink" title="（4）set容器排序总结"></a>（4）set容器排序总结</h3><p>当需要对基本数据类型进行排序时，建议使用functional头文件中的less和greater模板如（2）2，可以极大地减少代码量，当需要对自定义结构体进行排序时，可以在自定义的结构体中重载&lt;运算符，如（2）4所示。</p>
+<h2 id="二、map"><a href="#二、map" class="headerlink" title="二、map"></a>二、map</h2><h3 id="（1）实现机制-1"><a href="#（1）实现机制-1" class="headerlink" title="（1）实现机制"></a>（1）实现机制</h3><p>以下叙述引自<a href="http://www.cplusplus.com/reference/map/map/" target="_blank" rel="noopener">C++ reference</a></p>
+<blockquote>
+<p>Maps are associative containers that store elements formed by a combination of a key value and a mapped value, following a specific order.</p>
+</blockquote>
+<blockquote>
+<p>In a map, the key values are generally used to sort and uniquely identify the elements, while the mapped values store the content associated to this key. The types of key and mapped value may differ, and are grouped together in member type value_type, which is a pair type combining both:</p>
+</blockquote>
+<pre><code>typedef pair&lt;const Key, T&gt; value_type;</code></pre><blockquote>
+<p>Internally, the elements in a map are always sorted by its key following a specific strict weak ordering criterion indicated by its internal comparison object (of type Compare).</p>
+</blockquote>
+<blockquote>
+<p>map containers are generally slower than unordered_map containers to access individual elements by their key, but they allow the direct iteration on subsets based on their order.</p>
+</blockquote>
+<blockquote>
+<p>The mapped values in a map can be accessed directly by their corresponding key using the bracket operator ((operator[]).</p>
+</blockquote>
+<blockquote>
+<p>Maps are typically implemented as binary search trees.</p>
+</blockquote>
+<p>翻译大意：map容器是一个组合的容器用来存储键和它映射的值，遵循一种特殊的排序方式；排序根据key排序；map容器通常比unordered_map容器通过它们的键访问单个元素的速度慢，但是它们允许根据它们的顺序对子集进行直接迭代。map容器也允许通过数组形式来访问，比如_map[key],下表为键。map容器是二叉搜索树的实现。<br>其实，可以这样理解，map是一个结构体类型的set，结构体中包含键与值两个数据。当然肯定不会只是这么简单的如此。</p>
+<h3 id="（2）使用构造函数实现排序"><a href="#（2）使用构造函数实现排序" class="headerlink" title="（2）使用构造函数实现排序"></a>（2）使用构造函数实现排序</h3><h4 id="1-默认构造函数"><a href="#1-默认构造函数" class="headerlink" title="1.默认构造函数"></a>1.默认构造函数</h4><p>按照key值升序排列</p>
+<pre><code>map&lt;char,int&gt; first;
+  first[&apos;a&apos;]=10;
+  first[&apos;b&apos;]=30;
+  first[&apos;c&apos;]=50;
+  first[&apos;d&apos;]=70;</code></pre><h4 id="2-使用functional头文件"><a href="#2-使用functional头文件" class="headerlink" title="2.使用functional头文件"></a>2.使用functional头文件</h4><pre><code>std::map&lt;char,int,std::greater&lt;char&gt; &gt; first;
+  first[&apos;a&apos;]=10;
+  first[&apos;b&apos;]=30;
+  first[&apos;c&apos;]=50;
+  first[&apos;d&apos;]=70;</code></pre><h4 id="3-为自定义结构体排序"><a href="#3-为自定义结构体排序" class="headerlink" title="3.为自定义结构体排序"></a>3.为自定义结构体排序</h4><p>类比于set的自定义结构体排序，也可以有两种不同的重载方法，其一是在自定义的结构体内部重载&lt;运算符，调用仍使用无参构造函数（即只有键值两参数），其二是再另外创建一个结构体或类重载（）运算符，调用时需在第三个参数处调用；</p>
+<h4 id="重载-lt"><a href="#重载-lt" class="headerlink" title="重载&lt;"></a>重载&lt;</h4><pre><code>struct Node{
+int a;
+int b;
+Node(int _a,int _b):a(_a),b(_b){}
+   bool operator &lt; (const Node&amp; rhs) const{
+    return a != rhs.a ? a &gt; rhs.a : b &gt; rhs.b;//以a为第一比较标准，当a相等时比较b，降序排列
+} 
+};
+int main(){
+std::map&lt;Node,int&gt; first;
+  first[Node(2,3)]=10;
+  first[Node(2,2)]=30;
+  first[Node(3,3)]=50;
+  first[Node(4,3)]=70;
+}</code></pre><h4 id="重载（）"><a href="#重载（）" class="headerlink" title="重载（）"></a>重载（）</h4><pre><code>struct Node{
+int a;
+int b;
+Node(int _a,int _b):a(_a),b(_b){}
+   /*bool operator &lt; (const Node&amp; rhs) const{
+    return a != rhs.a ? a &gt; rhs.a : b &gt; rhs.b;//以a为第一比较标准，当a相等时比较b，降序排列
+} */
+};
+struct cmp {
+  bool operator () (const Node&amp; lhs, const Node&amp; rhs) const
+  {return lhs.a != rhs.a ? lhs.a &gt; rhs.a : lhs.b &gt; rhs.b;}
+};
+int main ()
+{
+  std::map&lt;Node,int,cmp&gt; first;
+  first[Node(2,3)]=10;
+  first[Node(2,2)]=30;
+  first[Node(3,3)]=50;
+  first[Node(4,3)]=70;</code></pre><p>上述两种重载方法都是一样的，以第一种较为简便。对&lt;的重载都是对std::less的重载，模板可以参考下<a href="https://www.cnblogs.com/stay-alive/p/8215400.html" target="_blank" rel="noopener">https://www.cnblogs.com/stay-alive/p/8215400.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoweisun.xyz/2020/03/23/dijsktra%EF%BC%88%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%9C%AC%E8%B4%A8%E6%80%9D%E6%83%B3%E6%8E%A2%E7%B4%A2%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrsun0">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人生羁客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/23/dijsktra%EF%BC%88%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%9C%AC%E8%B4%A8%E6%80%9D%E6%83%B3%E6%8E%A2%E7%B4%A2%EF%BC%89/" itemprop="url">dijsktra（迪杰斯特拉算法回顾与本质思想探索）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-23T21:09:22+08:00">
+                2020-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>Dijkstra(迪杰斯特拉)算法是典型的单源最短路径算法，用于计算一个节点到其他所有节点的最短路径。主要特点是以起始点为中心向外层层扩展，直到扩展到终点为止。Dijkstra算法是很有代表性的最短路径算法，在很多专业课程中都作为基本内容有详细的介绍，如数据结构，图论，运筹学等等。Dijkstra一般的表述通常有两种方式，一种用永久和临时标号方式，一种是用OPEN, CLOSE表的方式，这里均采用永久和临时标号的方式。注意该算法要求图中不存在负权边。  –360百科</p>
+</blockquote>
+<h3 id="算法思想阐述："><a href="#算法思想阐述：" class="headerlink" title="算法思想阐述："></a>算法思想阐述：</h3><p>迪杰斯特拉算法想要达成的目的是：从图（有向无向均可）中的某个节点出发，寻找到其他节点的最短距离，算法思想采用了一部分贪心思想和一部分dp思想。贪心思想即是想着：我要寻找目前的能和我连接的最短边，最贪心的就是所有的点都在最短路径上；而dp思想则想深了一层是：记录下这个最短路径吧，万一以后出现更短的呢，我就把它换掉！举个栗子，比如下面的图：<br>&lt;img src=”images/example.png/&gt;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://guoweisun.xyz/2020/03/19/%E5%AF%B9vscodeC-11%E6%A0%87%E5%87%86%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -360,7 +777,7 @@
       
         
           
-            <p>自从学了java以后，发现自己对C++有些疏于练习了，因为很多地方java的优势性和应用性是强于c语言的。当然，这是对普通的编码工作来说，C语言在造轮子方面有他无与伦比的优势，甚至C语言可以直接用来写操作系统。但是虽然C有些不方便，C++却因为它强大的stl库流行于学生之间，计算机专业的考研大纲规定，只允许用C/C++来编程，于是我又赶回来复习C++，但却突然发现，大一时候的工具用起来都不太爽利，codeblocks有时候会出现一些小bug（个人印象），dev虽然功能强大，适合初学者，但是在大量的编码工作时，由于缺少代码提示，所以使用起来也不太方便，visual studio又由于它的笨重型（超达20多个G）不适合成为中小型CPP的编写工具，于是我就只能另寻轻量级的编辑器，通过加载插件和配置环境的方法来实现，他就是VSCode。</br><br>其实，dev会作为很多比赛的官方编程软件，熟悉的使用它会很有帮助，我个人原因是因为当对stl库进行调试时，无法看到stl变量的值，于是通过网上铺天盖地的教程配置了C++环境，很多教程都说的很清楚了，我就总结一下各个部分实现的功能。</p>
+            <p>自从学了java以后，发现自己对C++有些疏于练习了，因为很多地方java的优势性和应用性是强于c语言的。当然，这是对普通的编码工作来说，C语言在造轮子方面有他无与伦比的优势，甚至C语言可以直接用来写操作系统。但是虽然C有些不方便，C++却因为它强大的stl库流行于学生之间，计算机专业的考研大纲规定，只允许用C/C++来编程，于是我又赶回来复习C++，但却突然发现，大一时候的工具用起来都不太爽利，codeblocks有时候会出现一些小bug（个人印象），dev虽然功能强大，适合初学者，但是在大量的编码工作时，由于缺少代码提示，所以使用起来也不太方便，visual studio又由于它的笨重型（超达20多个G）不适合成为中小型CPP的编写工具，于是我就只能另寻轻量级的编辑器，通过加载插件和配置环境的方法来实现，他就是VSCode。<br><br>其实，dev会作为很多比赛的官方编程软件，熟悉的使用它会很有帮助，我个人原因是因为当对stl库进行调试时，无法看到stl变量的值，于是通过网上铺天盖地的教程配置了C++环境，很多教程都说的很清楚了，我就总结一下各个部分实现的功能。</p>
 <h3 id="一、launch-json"><a href="#一、launch-json" class="headerlink" title="一、launch.json"></a>一、launch.json</h3><pre><code>{
 &quot;version&quot;: &quot;0.2.0&quot;,
 &quot;configurations&quot;: [
@@ -568,7 +985,7 @@ int main()
       
         
           
-            <p>&emsp;&emsp;<strong>晚</strong>饭前，我意外看到研究生复试大多要考英语听力的消息，瞬时慌了一下。毕竟我当初下决心要考研就是因为初试英语不考听力,虽然说复试中的英语比例没有那么大，但是想到就很慌的有木有！！！<del>_</del>一时间都不知道该不该继续考研这个决定了，因为很有可能自己努力了一年最后却没有收获，而且也失去了秋招春招的机会。可能有人会说你那么想考可以二战啊，但是家里经济情况不允许，虽然不至于供不起我，但是想到还是会很愧疚的啊，不想再平白的被养一年。</br><br>　　到了吃晚饭的时候，一如既往地跟我妈讨论买房的问题，我问妈妈说假如有一套200平的房子因为发生了凶杀案只卖20万你买不买？我妈摇了摇头，转而跟我说起了另一件事。“你知不知道，高唐（我们县城）有一套房子（大概八九十平的样子）只卖11万？”，我说：“不知道啊，为啥？难道也发生了凶杀案？”。“虽然不是凶杀案，但是也差不多了，据说夫妻两人，老婆跳楼了，因为谣传说是男的把女的推下去的，男的也上吊了，不知道上吊原因是愧疚还是别的原因，只剩下一个刚上初中的女儿”，我瞬时惊了一下“啊，上吊，为啥要上吊死啊，买个药喝了不好吗（关注点清奇）？”。我妈白了我一眼，没理我，继续回忆起了那件二十多年前的事情。“后来，那个女儿在她阿姨家生活，我也是在别人的谈话中才了解到原来跳楼的女人和我是一个庄里的，她比我大三岁。小女孩的父母突然决定离世，不知道为什么如此决然，丝毫不考虑自己的孩子。可是你以为关于这家人悲惨的命运就这样了吗？跳楼女人还有个哥哥，原来在东北过活，后来意外被疯狗咬到后突然疯了，于是就回到了老家，躺在床上不能自理，成了周边的大人吓唬小孩子的狼外婆：‘你不要去他家奥，他家里有害了狂犬病的，听见人声就要跳上来将咬你一口！’，于是小孩子就被吓得不敢靠近他家，觉得那里是个妖魔鬼怪的居所。这个男人疯了以后不久，他的老婆就带着一个儿子走了。可能有很多人潜意识里觉得农村的妇女思想封建，还会为死去的或者瘫痪的丈夫守寡什么的，但其实没有，每个人都是现实的，没有谁会为了一个贞节牌坊放弃自己的后半生。像书中的人物还是少之又少，而且我本人也不太赞成那样的做法，何苦为了一个已经不在的人再去为难自己呢？言归正传，在不久后的后来，疯了的男人的父亲老死了，作为唯一一个孙子，小孩子回到这个村子里参加葬礼，小孩子的奶奶也把自己不舍得花的积储都给了他，出乎意料的，本来已经断绝了好几年来往的两辈又来往了起来。但是好景不长，又过了好几年之后，孩子的奶奶也老了，孩子也不再来了。无人照料无人问津的疯男人也不知如何的没有了一点消息，也许是饿死在了那张他长躺的床铺之上。故事到这里就结束了，有点凄凉但很现实的一个真实故事。</br><br>　　在命运与生活面前，没有最不幸只有更不幸，谁也无法预料自己的生活将是什么。听完妈妈讲的故事后，因为英语复试听力考试的那些慌张失措彷徨不安瞬间消了大半。在整个人生面前，那么长久的时间对上这短小的考研一年，似乎很轻易的就战胜了。人生那么多不幸，那么多失意，那么多障碍，总是需要一步一步的去度过的，不管有多么艰难，硬着头皮，尽最大的努力往前冲，做过之后再回首其实没什么的吧！虽然有可能会失败，障碍没有被跃过反而将自己绊倒，也许此时的自己不知如何重新站起，但是，时间会告诉你一切，在长长的时间里，做好最坏的打算，做好心理的预设，但同时不要忘了尽好最大的努力，只要不被击得粉碎，沉稳的等到那个障碍来临，你的选择是沉默还是爆发，是一拳击碎扶摇万里还是跌跌撞撞再起河山亦其实都无所谓，只要看到便足够！
+            <p>&emsp;&emsp;<strong>晚</strong>饭前，我意外看到研究生复试大多要考英语听力的消息，瞬时慌了一下。毕竟我当初下决心要考研就是因为初试英语不考听力,虽然说复试中的英语比例没有那么大，但是想到就很慌的有木有！！！<del>_</del>一时间都不知道该不该继续考研这个决定了，因为很有可能自己努力了一年最后却没有收获，而且也失去了秋招春招的机会。可能有人会说你那么想考可以二战啊，但是家里经济情况不允许，虽然不至于供不起我，但是想到还是会很愧疚的啊，不想再平白的被养一年。<br><br>　　到了吃晚饭的时候，一如既往地跟我妈讨论买房的问题，我问妈妈说假如有一套200平的房子因为发生了凶杀案只卖20万你买不买？我妈摇了摇头，转而跟我说起了另一件事。“你知不知道，高唐（我们县城）有一套房子（大概八九十平的样子）只卖11万？”，我说：“不知道啊，为啥？难道也发生了凶杀案？”。“虽然不是凶杀案，但是也差不多了，据说夫妻两人，老婆跳楼了，因为谣传说是男的把女的推下去的，男的也上吊了，不知道上吊原因是愧疚还是别的原因，只剩下一个刚上初中的女儿”，我瞬时惊了一下“啊，上吊，为啥要上吊死啊，买个药喝了不好吗（关注点清奇）？”。我妈白了我一眼，没理我，继续回忆起了那件二十多年前的事情。“后来，那个女儿在她阿姨家生活，我也是在别人的谈话中才了解到原来跳楼的女人和我是一个庄里的，她比我大三岁。小女孩的父母突然决定离世，不知道为什么如此决然，丝毫不考虑自己的孩子。可是你以为关于这家人悲惨的命运就这样了吗？跳楼女人还有个哥哥，原来在东北过活，后来意外被疯狗咬到后突然疯了，于是就回到了老家，躺在床上不能自理，成了周边的大人吓唬小孩子的狼外婆：‘你不要去他家奥，他家里有害了狂犬病的，听见人声就要跳上来将咬你一口！’，于是小孩子就被吓得不敢靠近他家，觉得那里是个妖魔鬼怪的居所。这个男人疯了以后不久，他的老婆就带着一个儿子走了。可能有很多人潜意识里觉得农村的妇女思想封建，还会为死去的或者瘫痪的丈夫守寡什么的，但其实没有，每个人都是现实的，没有谁会为了一个贞节牌坊放弃自己的后半生。像书中的人物还是少之又少，而且我本人也不太赞成那样的做法，何苦为了一个已经不在的人再去为难自己呢？言归正传，在不久后的后来，疯了的男人的父亲老死了，作为唯一一个孙子，小孩子回到这个村子里参加葬礼，小孩子的奶奶也把自己不舍得花的积储都给了他，出乎意料的，本来已经断绝了好几年来往的两辈又来往了起来。但是好景不长，又过了好几年之后，孩子的奶奶也老了，孩子也不再来了。无人照料无人问津的疯男人也不知如何的没有了一点消息，也许是饿死在了那张他长躺的床铺之上。故事到这里就结束了，有点凄凉但很现实的一个真实故事。<br><br>　　在命运与生活面前，没有最不幸只有更不幸，谁也无法预料自己的生活将是什么。听完妈妈讲的故事后，因为英语复试听力考试的那些慌张失措彷徨不安瞬间消了大半。在整个人生面前，那么长久的时间对上这短小的考研一年，似乎很轻易的就战胜了。人生那么多不幸，那么多失意，那么多障碍，总是需要一步一步的去度过的，不管有多么艰难，硬着头皮，尽最大的努力往前冲，做过之后再回首其实没什么的吧！虽然有可能会失败，障碍没有被跃过反而将自己绊倒，也许此时的自己不知如何重新站起，但是，时间会告诉你一切，在长长的时间里，做好最坏的打算，做好心理的预设，但同时不要忘了尽好最大的努力，只要不被击得粉碎，沉稳的等到那个障碍来临，你的选择是沉默还是爆发，是一拳击碎扶摇万里还是跌跌撞撞再起河山亦其实都无所谓，只要看到便足够！
 　　</p>
 
           
@@ -1097,7 +1514,7 @@ float f =(float)d;</code></pre>
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1108,7 +1525,7 @@ float f =(float)d;</code></pre>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1119,7 +1536,7 @@ float f =(float)d;</code></pre>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>vector用法总结</title>
-    <url>/2020/04/12/vector%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+    <url>/2020/04/12/vector/</url>
     <content><![CDATA[<h3 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1.初始化"></a>1.初始化</h3><p>首先，我们来看一下vector初始化的几种方法，以及对这几种初始化下的容量大小分析：</p>
 <h4 id="（1）-无参初始化"><a href="#（1）-无参初始化" class="headerlink" title="（1） 无参初始化"></a>（1） 无参初始化</h4><pre><code>#include&lt;iostream&gt;
 #include&lt;vector&gt;

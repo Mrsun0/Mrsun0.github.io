@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-vector," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="人生羁客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1.初始化首先，我们来看一下vector初始化的几种方法，以及对这几种初始化下的容量大小分析： （1） 无参初始化#include&lt;iostream&gt; #include&lt;vector&gt; using namespace std; int main() {     vector&lt;int&gt; a;     cout&lt;&lt;a.size();     return">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vector用法总结">
+<meta property="og:url" content="http://guoweisun.xyz/2020/04/12/vector%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="人生羁客">
+<meta property="og:description" content="1.初始化首先，我们来看一下vector初始化的几种方法，以及对这几种初始化下的容量大小分析： （1） 无参初始化#include&lt;iostream&gt; #include&lt;vector&gt; using namespace std; int main() {     vector&lt;int&gt; a;     cout&lt;&lt;a.size();     return">
+<meta property="og:locale" content="CN">
+<meta property="og:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-2.png">
+<meta property="og:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3.png">
+<meta property="og:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3-2.png">
+<meta property="og:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3-3.png">
+<meta property="og:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4.png">
+<meta property="og:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-2.png">
+<meta property="og:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-3.png">
+<meta property="og:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-4.png">
+<meta property="article:published_time" content="2020-04-12T04:18:21.000Z">
+<meta property="article:modified_time" content="2020-04-12T06:44:44.945Z">
+<meta property="article:author" content="mrsun0">
+<meta property="article:tag" content="-vector">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guoweisun.xyz/2020/04/12/vector用法总结/"/>
+
+
+
+
+
+  <title>vector用法总结 | 人生羁客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">人生羁客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">羁旅</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoweisun.xyz/2020/04/12/vector%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrsun0">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人生羁客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vector用法总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-12T12:18:21+08:00">
+                2020-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1.初始化"></a>1.初始化</h3><p>首先，我们来看一下vector初始化的几种方法，以及对这几种初始化下的容量大小分析：</p>
+<h4 id="（1）-无参初始化"><a href="#（1）-无参初始化" class="headerlink" title="（1） 无参初始化"></a>（1） 无参初始化</h4><pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    vector&lt;int&gt; a;
+    cout&lt;&lt;a.size();
+    return 0;
+}</code></pre><p>这种初始方法最为简便，容器容量随着元素的增多而增多；</p>
+<h4 id="（2）-带有容量参数的初始化"><a href="#（2）-带有容量参数的初始化" class="headerlink" title="（2） 带有容量参数的初始化"></a>（2） 带有容量参数的初始化</h4><pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    vector&lt;int&gt; a(2);
+    a.push_back(1);
+    cout&lt;&lt;a.size();
+    return 0;
+}</code></pre><p>在未push_back前输出结果是2,插入一个元素后输出结果变为3，也就是说容器容量在初始化的基础上仍然会随着元素的push增多，这种情况下初始化数值为0，也可以指定初始化数值，<code>vector&lt;int&gt; a(2,100)</code>,即创建一个大小为2，初始化为100的vector；但是与第一种无参初始化有些不同：</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    vector&lt;int&gt; a(2);
+    a[1]=88;
+    cout&lt;&lt;a.size();
+    return 0;
+}</code></pre><p>可以看出当有了初始化容量之后，就相当于一个相同容量的初始化为0的可改变大小的数组，此时可以根据元素下标去访问，这里对a[1]复制后容量仍为2，vector值变成{0，88}；</p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-2.png" alt></p>
+<h4 id="3-使用数组初始化"><a href="#3-使用数组初始化" class="headerlink" title="(3) 使用数组初始化"></a>(3) 使用数组初始化</h4><pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    int aa[2] = {1,2};
+    vector&lt;int&gt; a(aa,aa+2);
+    int size = a.size();
+    return 0;
+}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3.png" alt></p>
+<p>如果这里在推入数据会怎么样呢？</p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3-2.png" alt></p>
+<p>可以看出不管在什么情况下，vector都是可以进行增长的，不过需要注意的是，千万不要用下标访问未存在的地址，如果出现段错误等地址形式的错误可以看看这个方向。另外还需要提及到的一点是用初始化数组的方式初始化vector也是可以的，比如<code>vector&lt;int&gt; a={1,2,3};</code></p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3-3.png" alt></p>
+<h3 id="2-数据的增删改查"><a href="#2-数据的增删改查" class="headerlink" title="2. 数据的增删改查"></a>2. 数据的增删改查</h3><h4 id="（1）push-back"><a href="#（1）push-back" class="headerlink" title="（1）push_back()"></a>（1）push_back()</h4><p>最基本的数据增加方法，在最后插入，不多说；</p>
+<h4 id="（2）insert"><a href="#（2）insert" class="headerlink" title="（2）insert()"></a>（2）insert()</h4><p>insert()一般用的情况就是在头处插入，insert的用法一般是有三种：1.直接指定位置指定插入数据；2.在1的情况下同时指定重复的次数；3.指定插入位置和另一个数组或vector的起始位置，演示代码：</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    vector&lt;int&gt; a={1,2,3};
+    vector&lt;int&gt;::iterator it=a.begin();
+    a.insert(it,0);
+    it=a.end();
+    a.insert(it,4);
+    vector&lt;int&gt; b={7,8};
+    b.insert(b.begin(),a.begin(),a.end());
+    b.insert(b.end(),4,10);
+       return 0;
+}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4.png" alt></p>
+<p>不过此处有一点需要注意：当使用iterator来作为插入位置标识的时候，需要注意，当插入成功后，如果仍想在此处插入，需要更新it的值，比如it=a.begin();当插入0成功后，it指向的不是0，而是一个随机地址；如下演示，it的值是一个随机数：</p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-2.png" alt></p>
+<h4 id="（3）pop-back"><a href="#（3）pop-back" class="headerlink" title="（3）pop_back()"></a>（3）pop_back()</h4><p>尾部删除，也不需多说；</p>
+<h4 id="（4）-erase"><a href="#（4）-erase" class="headerlink" title="（4） erase()"></a>（4） erase()</h4><p>指定位置或指定范围删除</p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-3.png" alt></p>
+<h4 id="此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现"><a href="#此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现" class="headerlink" title="此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现"></a>此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现</h4><pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main()
+{
+       vector&lt;int&gt; a={1,2,3,4,5};
+    /*find函数返回值是一个指针*/
+    vector&lt;int&gt;::iterator it=find(a.begin(),a.end(),3);
+    cout&lt;&lt;*it&lt;&lt;endl;
+    /*可以通过指针相减得到序列号*/
+    cout&lt;&lt;&quot;position:&quot;&lt;&lt;it-a.begin()&lt;&lt;endl;
+    return 0;
+}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-4.png" alt></p>
+<p>关于vector常用的方法大概就这么多了，以后遇到可以在进行补充^_^~</p>
+<h5 id="对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》"><a href="#对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》" class="headerlink" title="对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》"></a><em>对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》</em></h5>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vector/" rel="tag"># -vector</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/06/%E5%AF%B9STL%E4%B8%AD%E5%8F%AF%E6%8E%92%E5%BA%8F%E5%AE%B9%E5%99%A8%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%88%86%E6%9E%90/" rel="next" title="对STL中可排序容器的总结与分析">
+                <i class="fa fa-chevron-left"></i> 对STL中可排序容器的总结与分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.png"
+                alt="mrsun0" />
+            
+              <p class="site-author-name" itemprop="name">mrsun0</p>
+              <p class="site-description motion-element" itemprop="description">mrsun0的个人博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-初始化"><span class="nav-number">1.</span> <span class="nav-text">1.初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）-无参初始化"><span class="nav-number">1.1.</span> <span class="nav-text">（1） 无参初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）-带有容量参数的初始化"><span class="nav-number">1.2.</span> <span class="nav-text">（2） 带有容量参数的初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-使用数组初始化"><span class="nav-number">1.3.</span> <span class="nav-text">(3) 使用数组初始化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据的增删改查"><span class="nav-number">2.</span> <span class="nav-text">2. 数据的增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）push-back"><span class="nav-number">2.1.</span> <span class="nav-text">（1）push_back()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）insert"><span class="nav-number">2.2.</span> <span class="nav-text">（2）insert()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）pop-back"><span class="nav-number">2.3.</span> <span class="nav-text">（3）pop_back()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（4）-erase"><span class="nav-number">2.4.</span> <span class="nav-text">（4） erase()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现"><span class="nav-number">2.5.</span> <span class="nav-text">此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》"><span class="nav-number">2.5.1.</span> <span class="nav-text">对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mrsun0</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

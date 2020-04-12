@@ -267,6 +267,229 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guoweisun.xyz/2020/04/12/vector%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="mrsun0">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="人生羁客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/12/vector%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93/" itemprop="url">vector用法总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-12T12:18:21+08:00">
+                2020-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1.初始化"></a>1.初始化</h3><p>首先，我们来看一下vector初始化的几种方法，以及对这几种初始化下的容量大小分析：</p>
+<h4 id="（1）-无参初始化"><a href="#（1）-无参初始化" class="headerlink" title="（1） 无参初始化"></a>（1） 无参初始化</h4><pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    vector&lt;int&gt; a;
+    cout&lt;&lt;a.size();
+    return 0;
+}</code></pre><p>这种初始方法最为简便，容器容量随着元素的增多而增多；</p>
+<h4 id="（2）-带有容量参数的初始化"><a href="#（2）-带有容量参数的初始化" class="headerlink" title="（2） 带有容量参数的初始化"></a>（2） 带有容量参数的初始化</h4><pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    vector&lt;int&gt; a(2);
+    a.push_back(1);
+    cout&lt;&lt;a.size();
+    return 0;
+}</code></pre><p>在未push_back前输出结果是2,插入一个元素后输出结果变为3，也就是说容器容量在初始化的基础上仍然会随着元素的push增多，这种情况下初始化数值为0，也可以指定初始化数值，<code>vector&lt;int&gt; a(2,100)</code>,即创建一个大小为2，初始化为100的vector；但是与第一种无参初始化有些不同：</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    vector&lt;int&gt; a(2);
+    a[1]=88;
+    cout&lt;&lt;a.size();
+    return 0;
+}</code></pre><p>可以看出当有了初始化容量之后，就相当于一个相同容量的初始化为0的可改变大小的数组，此时可以根据元素下标去访问，这里对a[1]复制后容量仍为2，vector值变成{0，88}；</p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-2.png" alt></p>
+<h4 id="3-使用数组初始化"><a href="#3-使用数组初始化" class="headerlink" title="(3) 使用数组初始化"></a>(3) 使用数组初始化</h4><pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    int aa[2] = {1,2};
+    vector&lt;int&gt; a(aa,aa+2);
+    int size = a.size();
+    return 0;
+}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3.png" alt></p>
+<p>如果这里在推入数据会怎么样呢？</p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3-2.png" alt></p>
+<p>可以看出不管在什么情况下，vector都是可以进行增长的，不过需要注意的是，千万不要用下标访问未存在的地址，如果出现段错误等地址形式的错误可以看看这个方向。另外还需要提及到的一点是用初始化数组的方式初始化vector也是可以的，比如<code>vector&lt;int&gt; a={1,2,3};</code></p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3-3.png" alt></p>
+<h3 id="2-数据的增删改查"><a href="#2-数据的增删改查" class="headerlink" title="2. 数据的增删改查"></a>2. 数据的增删改查</h3><h4 id="（1）push-back"><a href="#（1）push-back" class="headerlink" title="（1）push_back()"></a>（1）push_back()</h4><p>最基本的数据增加方法，在最后插入，不多说；</p>
+<h4 id="（2）insert"><a href="#（2）insert" class="headerlink" title="（2）insert()"></a>（2）insert()</h4><p>insert()一般用的情况就是在头处插入，insert的用法一般是有三种：1.直接指定位置指定插入数据；2.在1的情况下同时指定重复的次数；3.指定插入位置和另一个数组或vector的起始位置，演示代码：</p>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+using namespace std;
+int main()
+{
+    vector&lt;int&gt; a={1,2,3};
+    vector&lt;int&gt;::iterator it=a.begin();
+    a.insert(it,0);
+    it=a.end();
+    a.insert(it,4);
+    vector&lt;int&gt; b={7,8};
+    b.insert(b.begin(),a.begin(),a.end());
+    b.insert(b.end(),4,10);
+       return 0;
+}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4.png" alt></p>
+<p>不过此处有一点需要注意：当使用iterator来作为插入位置标识的时候，需要注意，当插入成功后，如果仍想在此处插入，需要更新it的值，比如it=a.begin();当插入0成功后，it指向的不是0，而是一个随机地址；如下演示，it的值是一个随机数：</p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-2.png" alt></p>
+<h4 id="（3）pop-back"><a href="#（3）pop-back" class="headerlink" title="（3）pop_back()"></a>（3）pop_back()</h4><p>尾部删除，也不需多说；</p>
+<h4 id="（4）-erase"><a href="#（4）-erase" class="headerlink" title="（4） erase()"></a>（4） erase()</h4><p>指定位置或指定范围删除</p>
+<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-3.png" alt></p>
+<h4 id="此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现"><a href="#此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现" class="headerlink" title="此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现"></a>此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现</h4><pre><code>#include&lt;iostream&gt;
+#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+using namespace std;
+int main()
+{
+       vector&lt;int&gt; a={1,2,3,4,5};
+    /*find函数返回值是一个指针*/
+    vector&lt;int&gt;::iterator it=find(a.begin(),a.end(),3);
+    cout&lt;&lt;*it&lt;&lt;endl;
+    /*可以通过指针相减得到序列号*/
+    cout&lt;&lt;&quot;position:&quot;&lt;&lt;it-a.begin()&lt;&lt;endl;
+    return 0;
+}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-4.png" alt></p>
+<p>关于vector常用的方法大概就这么多了，以后遇到可以在进行补充^_^~</p>
+<h5 id="对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》"><a href="#对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》" class="headerlink" title="对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》"></a><em>对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》</em></h5>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://guoweisun.xyz/2020/04/06/%E5%AF%B9STL%E4%B8%AD%E5%8F%AF%E6%8E%92%E5%BA%8F%E5%AE%B9%E5%99%A8%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -286,7 +509,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/06/%E5%AF%B9STL%E4%B8%AD%E5%8F%AF%E6%8E%92%E5%BA%8F%E5%AE%B9%E5%99%A8%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%88%86%E6%9E%90/" itemprop="url">gagaga</a></h1>
+                <a class="post-title-link" href="/2020/04/06/%E5%AF%B9STL%E4%B8%AD%E5%8F%AF%E6%8E%92%E5%BA%8F%E5%AE%B9%E5%99%A8%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%88%86%E6%9E%90/" itemprop="url">对STL中可排序容器的总结与分析</a></h1>
         
 
         <div class="post-meta">
@@ -1514,7 +1737,7 @@ float f =(float)d;</code></pre>
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1536,7 +1759,7 @@ float f =(float)d;</code></pre>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

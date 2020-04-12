@@ -390,7 +390,7 @@ int main()
     cout&lt;&lt;a.size();
     return 0;
 }</code></pre><p>可以看出当有了初始化容量之后，就相当于一个相同容量的初始化为0的可改变大小的数组，此时可以根据元素下标去访问，这里对a[1]复制后容量仍为2，vector值变成{0，88}；</p>
-<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-2.png" alt></p>
+<p><img src="/.xyz//vector-2.png" alt></p>
 <h4 id="3-使用数组初始化"><a href="#3-使用数组初始化" class="headerlink" title="(3) 使用数组初始化"></a>(3) 使用数组初始化</h4><pre><code>#include&lt;iostream&gt;
 #include&lt;vector&gt;
 using namespace std;
@@ -400,11 +400,11 @@ int main()
     vector&lt;int&gt; a(aa,aa+2);
     int size = a.size();
     return 0;
-}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3.png" alt></p>
+}</code></pre><p><img src="/.xyz//vector-3.png" alt></p>
 <p>如果这里在推入数据会怎么样呢？</p>
-<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3-2.png" alt></p>
+<p><img src="/.xyz//vector-3-2.png" alt></p>
 <p>可以看出不管在什么情况下，vector都是可以进行增长的，不过需要注意的是，千万不要用下标访问未存在的地址，如果出现段错误等地址形式的错误可以看看这个方向。另外还需要提及到的一点是用初始化数组的方式初始化vector也是可以的，比如<code>vector&lt;int&gt; a={1,2,3};</code></p>
-<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-3-3.png" alt></p>
+<p><img src="/.xyz//vector-3-3.png" alt></p>
 <h3 id="2-数据的增删改查"><a href="#2-数据的增删改查" class="headerlink" title="2. 数据的增删改查"></a>2. 数据的增删改查</h3><h4 id="（1）push-back"><a href="#（1）push-back" class="headerlink" title="（1）push_back()"></a>（1）push_back()</h4><p>最基本的数据增加方法，在最后插入，不多说；</p>
 <h4 id="（2）insert"><a href="#（2）insert" class="headerlink" title="（2）insert()"></a>（2）insert()</h4><p>insert()一般用的情况就是在头处插入，insert的用法一般是有三种：1.直接指定位置指定插入数据；2.在1的情况下同时指定重复的次数；3.指定插入位置和另一个数组或vector的起始位置，演示代码：</p>
 <pre><code>#include&lt;iostream&gt;
@@ -421,12 +421,12 @@ int main()
     b.insert(b.begin(),a.begin(),a.end());
     b.insert(b.end(),4,10);
        return 0;
-}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4.png" alt></p>
+}</code></pre><p><img src="/.xyz//vector-4.png" alt></p>
 <p>不过此处有一点需要注意：当使用iterator来作为插入位置标识的时候，需要注意，当插入成功后，如果仍想在此处插入，需要更新it的值，比如it=a.begin();当插入0成功后，it指向的不是0，而是一个随机地址；如下演示，it的值是一个随机数：</p>
-<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-2.png" alt></p>
+<p><img src="/.xyz//vector-4-2.png" alt></p>
 <h4 id="（3）pop-back"><a href="#（3）pop-back" class="headerlink" title="（3）pop_back()"></a>（3）pop_back()</h4><p>尾部删除，也不需多说；</p>
 <h4 id="（4）-erase"><a href="#（4）-erase" class="headerlink" title="（4） erase()"></a>（4） erase()</h4><p>指定位置或指定范围删除</p>
-<p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-3.png" alt></p>
+<p><img src="/.xyz//vector-4-3.png" alt></p>
 <h4 id="此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现"><a href="#此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现" class="headerlink" title="此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现"></a>此外关于移动、查询数据vector容器并没有提供相应的方法，移动只能通过删除再添加来实现，不过查找我们可以通过stl库提供的find函数来实现</h4><pre><code>#include&lt;iostream&gt;
 #include&lt;vector&gt;
 #include&lt;algorithm&gt;
@@ -440,7 +440,7 @@ int main()
     /*可以通过指针相减得到序列号*/
     cout&lt;&lt;&quot;position:&quot;&lt;&lt;it-a.begin()&lt;&lt;endl;
     return 0;
-}</code></pre><p><img src="https://github.com/Mrsun0/Mrsun0.github.io/blob/master/images/vector-4-4.png" alt></p>
+}</code></pre><p><img src="/.xyz//vector-4-4.png" alt></p>
 <p>关于vector常用的方法大概就这么多了，以后遇到可以在进行补充^_^~</p>
 <h5 id="对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》"><a href="#对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》" class="headerlink" title="对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》"></a><em>对彼此的情感，他们一句话也不提。沉默也有某种魔力，就像最漂亮脆弱的肥皂泡升到时空中，清晰可见，五彩斑斓，可最好是不要去碰它。有一天，玛丽娅想她的父母嘴边是否经常挂着爱呢。她猜得很准，他们很少说；在他们幸福的婚姻中，无须提起如此肯定、毋庸置疑的那份情感。—-《岛》</em></h5>
           
